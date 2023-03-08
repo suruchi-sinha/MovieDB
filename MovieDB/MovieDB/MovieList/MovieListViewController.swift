@@ -20,6 +20,8 @@ final class MovieListViewController: UITableViewController, MovieListViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Top Movies"
         viewModel.delegate = self
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.defaultIndentifier)
         tableView.rowHeight = UITableView.automaticDimension
