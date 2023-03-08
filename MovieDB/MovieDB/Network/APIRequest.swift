@@ -1,15 +1,15 @@
 import Foundation
 
-enum RequestMethod: String {
+enum APIMethod: String {
     case get = "GET"
 }
 
 struct APIRequest<T> {
     
-    let method: RequestMethod
+    let method: APIMethod
     let path: String
     
-    init(method: RequestMethod = .get, path: String) {
+    init(method: APIMethod = .get, path: String) {
         self.method = method
         self.path = path
     }

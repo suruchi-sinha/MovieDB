@@ -46,7 +46,7 @@ final class MovieCell: UITableViewCell {
         textStackView.axis = .vertical
         textStackView.spacing = CGFloat.Spacing.half
         
-        containerStackView.autoLayout()
+        containerStackView.translatesAutoresizingMaskIntoConstraints = false
         containerStackView.spacing = CGFloat.Spacing.two
         containerStackView.alignment = .top
         
@@ -64,5 +64,17 @@ final class MovieCell: UITableViewCell {
         
         constraints.append(movieImageView.widthAnchor.constraint(equalToConstant: imageSize.width))
         constraints.append(movieImageView.heightAnchor.constraint(equalToConstant: imageSize.height))
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    func configureCell(with movie: Movie) {
+        titleLabel.text = movie.title
+        descriptionLabel.text = movie.overview
+        
+        if let path = movie.posterPath {
+            movieImageView.setImage(posterPath: path)
+        } else {
+            movieImageView.image = nil
+        }
     }
 }
