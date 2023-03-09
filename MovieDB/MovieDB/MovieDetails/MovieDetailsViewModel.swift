@@ -2,7 +2,7 @@ import Foundation
 
 protocol MovieDetailsViewModelDisplayable {
     var title: String { get }
-    func fetchMovieDetails(completion: @escaping (MovieDetails) -> Void)
+    func fetchMovieDetails(completion: @escaping (MovieDetails?) -> Void)
 }
 
 final class MovieDetailsViewModel: MovieDetailsViewModelDisplayable {
@@ -21,7 +21,7 @@ final class MovieDetailsViewModel: MovieDetailsViewModelDisplayable {
         self.apiManager = apiManager
     }
     
-    func fetchMovieDetails(completion: @escaping (MovieDetails) -> Void) {
+    func fetchMovieDetails(completion: @escaping (MovieDetails?) -> Void) {
         apiManager.sendRequest(for: MovieDetails.details(for: movie.id)) { [weak self] response in
             switch response {
             case .success(let movieDetails):
@@ -31,7 +31,7 @@ final class MovieDetailsViewModel: MovieDetailsViewModelDisplayable {
                 }
             case .failure:
                 DispatchQueue.main.async {
-                    
+                    completion(nil)
                 }
             }
         }

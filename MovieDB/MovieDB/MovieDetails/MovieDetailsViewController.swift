@@ -25,6 +25,12 @@ final class MovieDetailsViewController: UIViewController {
         setupView()
         setupConstraints()
         viewModel.fetchMovieDetails { [weak self] details in
+            guard let details = details else {
+                DispatchQueue.main.async {
+                    self?.presentErrorView()
+                }
+                return
+            }
             DispatchQueue.main.async {
                 self?.configureView(with: details)
             }
@@ -85,5 +91,12 @@ final class MovieDetailsViewController: UIViewController {
         backdropImageView.setImage(backdropPath: movieDetails.backdropPath)
         titleLabel.text = movieDetails.title
         overviewLabel.text = movieDetails.overview
+    }
+    
+    private func presentErrorView() {
+        let alertController = UIAlertController(title: "", message: "Something went wrong", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

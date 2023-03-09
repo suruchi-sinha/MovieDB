@@ -59,7 +59,10 @@ final class MovieListViewController: UITableViewController, MovieListDelegate {
     }
     
     func didReceiveError() {
-        
+        let alertController = UIAlertController(title: "", message: "Something went wrong", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
