@@ -2,7 +2,7 @@ import Foundation
 
 protocol MovieListViewModelDisplayable {
     var movies: [Movie] { set get }
-    var delegate: MovieListViewControllerDelegate? { get set }
+    var delegate: MovieListDelegate? { get set }
     func fetchMovieList()
 }
 
@@ -14,7 +14,7 @@ final class MovieListViewModel: MovieListViewModelDisplayable {
         }
     }
     
-    weak var delegate: MovieListViewControllerDelegate?
+    weak var delegate: MovieListDelegate?
     private let apiManager: APIManaging
     
     init(apiManager: APIManaging = APIManager()) {

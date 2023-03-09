@@ -1,16 +1,20 @@
 import UIKit
 
-protocol MovieListViewControllerDelegate: AnyObject {
+protocol MovieListDelegate: AnyObject {
     func didReceiveResponse()
     func didReceiveError()
 }
 
-final class MovieListViewController: UITableViewController, MovieListViewControllerDelegate {
+final class MovieListViewController: UITableViewController, MovieListDelegate {
     
     private var viewModel: MovieListViewModelDisplayable
+    
+    private weak var delegate: MovieCoordinatorDelegate?
 
-    init(viewModel: MovieListViewModelDisplayable) {
+    init(viewModel: MovieListViewModelDisplayable,
+         delegate: MovieCoordinatorDelegate?) {
         self.viewModel = viewModel
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,6 +47,11 @@ final class MovieListViewController: UITableViewController, MovieListViewControl
         let movie = viewModel.movies[indexPath.row]
         cell.configureCell(with: movie)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = viewModel.movies[indexPath.row]
+        delegate?.launchMovieDetails(for: movie)
     }
     
     func didReceiveResponse() {

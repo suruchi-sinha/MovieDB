@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+protocol MovieCoordinatorDelegate: AnyObject {
+    func launchMovieDetails(for selectedMovie: Movie)
+}
+
 final class MovieCoordinator: NSObject, Coordinator {
     var parentCoordinator: Coordinator?
     
@@ -17,7 +21,16 @@ final class MovieCoordinator: NSObject, Coordinator {
     
     func start() {
         let viewModel = MovieListViewModel(apiManager: apiManager)
-        let viewController = MovieListViewController(viewModel: viewModel)
+        let viewController = MovieListViewController(viewModel: viewModel, delegate: self)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension MovieCoordinator: MovieCoordinatorDelegate {
+    
+    func launchMovieDetails(for selectedMovie: Movie) {
+        let viewModel = MovieDetailsViewModel(movie: selectedMovie, apiManager: apiManager)
+        let viewController = MovieDetailsViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

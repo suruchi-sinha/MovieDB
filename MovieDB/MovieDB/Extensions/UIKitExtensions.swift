@@ -15,8 +15,8 @@ extension UIFont {
 extension UIColor {
     
     enum Text {
-        static let darkGray: UIColor = UIColor.darkGray
-        static let gray: UIColor = UIColor.gray
+        static let primary: UIColor = UIColor.darkGray
+        static let secondary: UIColor = UIColor.gray
         static let white: UIColor = UIColor.white
     }
     

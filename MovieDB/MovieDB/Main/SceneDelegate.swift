@@ -3,6 +3,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private var coordinator: MovieCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -14,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.barTintColor = .white
         navigationController.navigationBar.isTranslucent = false
         
-        let coordinator = MovieCoordinator(navigationController: navigationController)
-        coordinator.start()
+        coordinator = MovieCoordinator(navigationController: navigationController)
+        coordinator?.start()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
