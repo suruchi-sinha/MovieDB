@@ -29,12 +29,12 @@ final class MovieCell: UITableViewCell {
         layoutMargins = UIEdgeInsets(top: CGFloat.Spacing.two, left: CGFloat.Spacing.two, bottom: CGFloat.Spacing.two, right: CGFloat.Spacing.two)
         
         titleLabel.font = UIFont.Heading.small
-        titleLabel.textColor = UIColor.Text.darkGray
+        titleLabel.textColor = UIColor.Text.primary
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
         
         descriptionLabel.font = UIFont.Body.small
-        descriptionLabel.textColor = UIColor.Text.gray
+        descriptionLabel.textColor = UIColor.Text.secondary
         descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
         

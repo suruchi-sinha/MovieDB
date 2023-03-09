@@ -1,16 +1,20 @@
 import UIKit
 
-protocol MovieListViewControllerDelegate: AnyObject {
+protocol MovieListDelegate: AnyObject {
     func didReceiveResponse()
     func didReceiveError()
 }
 
-final class MovieListViewController: UITableViewController, MovieListViewControllerDelegate {
+final class MovieListViewController: UITableViewController, MovieListDelegate {
     
     private var viewModel: MovieListViewModelDisplayable
+    
+    private weak var delegate: MovieCoordinatorDelegate?
 
-    init(viewModel: MovieListViewModelDisplayable) {
+    init(viewModel: MovieListViewModelDisplayable,
+         delegate: MovieCoordinatorDelegate?) {
         self.viewModel = viewModel
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -20,6 +24,8 @@ final class MovieListViewController: UITableViewController, MovieListViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Top Movies"
         viewModel.delegate = self
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.defaultIndentifier)
         tableView.rowHeight = UITableView.automaticDimension
@@ -43,12 +49,20 @@ final class MovieListViewController: UITableViewController, MovieListViewControl
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = viewModel.movies[indexPath.row]
+        delegate?.launchMovieDetails(for: movie)
+    }
+    
     func didReceiveResponse() {
         tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
     
     func didReceiveError() {
-        
+        let alertController = UIAlertController(title: "", message: "Something went wrong", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
