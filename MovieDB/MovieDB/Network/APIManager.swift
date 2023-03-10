@@ -13,7 +13,7 @@ final class APIManager: APIManaging {
     
     private let urlSession: URLSession
     private let host = "https://api.themoviedb.org/3"
-    private let apiKey = "5501190c373913e360fcee6cde3c327e"
+    private let apiKey = ""
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
