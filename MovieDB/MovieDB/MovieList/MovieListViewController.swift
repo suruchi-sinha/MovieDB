@@ -12,7 +12,7 @@ final class MovieListViewController: UITableViewController, MovieListDelegate {
     private weak var delegate: MovieCoordinatorDelegate?
 
     init(viewModel: MovieListViewModelDisplayable,
-         delegate: MovieCoordinatorDelegate?) {
+         delegate: MovieCoordinatorDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)

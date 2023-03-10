@@ -4,9 +4,10 @@ import Foundation
 class MovieListViewModelDisplayableMock: MovieListViewModelDisplayable {
     
     var delegate: MovieListDelegate?
+    var fetchedMovieList: Bool = false
     
     func fetchMovieList() {
-        
+        fetchedMovieList = true
     }
     
     var movies: [Movie] = []
@@ -39,8 +40,10 @@ class MovieDetailsViewModelDisplayableMock: MovieDetailsViewModelDisplayable {
     
     var title: String = "title"
     var movieDetails: MovieDetails?
+    var fetchedMovieDetails = false
     
     func fetchMovieDetails(completion: @escaping (MovieDetails?) -> Void) {
+        fetchedMovieDetails = true
         completion(movieDetails)
     }
 }

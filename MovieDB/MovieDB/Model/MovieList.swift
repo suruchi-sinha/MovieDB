@@ -1,6 +1,6 @@
 import Foundation
 
-struct APIResult<T: Decodable>: Decodable {
+struct MovieList<T: Decodable>: Decodable {
     
     let pageNumber: Int
     let totalResults: Int
