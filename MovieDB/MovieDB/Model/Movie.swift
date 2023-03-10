@@ -16,7 +16,7 @@ struct Movie: Decodable {
 }
 
 extension Movie {
-    static var topRated: APIRequest<MovieList<Movie>> {
+    static var topRated: APIRequest<List<Movie>> {
         return APIRequest(method: .get, path: "/movie/top_rated")
     }
 }
